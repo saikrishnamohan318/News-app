@@ -1,5 +1,4 @@
 import React from "react";
-import plus from '../assets/plus.png';
 
 function NewsPageComponent({ newsData,showForm }){
     const data = newsData
@@ -16,7 +15,6 @@ function NewsPageComponent({ newsData,showForm }){
                 </div>
             )) : <p className="dnf">Data not found</p>}
         </div>
-        <button className="d-flex align-items-center justify-content-evenly createbtn" onClick={()=>showForm()}><img src={plus} alt="plus" width="20px" height="20px" /><span style={{marginLeft:"10px"}}>CreateBlog</span></button>
         </>
     )
 }

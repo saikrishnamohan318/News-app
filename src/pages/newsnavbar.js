@@ -4,14 +4,12 @@ import { generalNewsAction, businessNewsAction, techNewsAction, moviesNewsAction
 import newslogo from '../assets/newslogo.png';
 import NewsPageComponent from "./newspage";
 import Loader from "../components/loader";
-import Blogform from "../components/blogform";
 
 function NewsComponent(){
     const dispatch = useDispatch();
     const [newsData,setNewsData] = useState([]);
     const [searchvalue,setSearchValue] = useState('');
     const [bool,setBool] = useState(false);
-    const [create,setCreate] = useState(true);
 
     //getting general news from store
     const data = useSelector(state=>state.generalNews);
@@ -113,14 +111,9 @@ function NewsComponent(){
             lists.style.display = 'none';
         }
     }
-
-    //to show blog creation form
-    var showForm = () => {
-        setCreate(!create);
-    }
     return(
         <>
-        {create ? (
+        (
             <div className="maindiv">
                 <nav className="navbar navbar-expand-lg">
                     <div className="container-fluid">
@@ -146,9 +139,6 @@ function NewsComponent(){
                                     <a className="nav-link" href="#sports" onClick={sportsNews}>Sports</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#userposted" onClick={userBlogs}>UserBlogs</a>
-                                </li>
-                                <li className="nav-item">
                                     <form className="d-flex navform">
                                         <input className="form-control me-2" type="search" placeholder="Search news" aria-label="Search" onChange={e=>setSearchValue(e.target.value)} value={searchvalue}/>
                                         <button className="btn btn-outline-success" type="button" onClick={searchNews}>Search</button>
@@ -158,11 +148,9 @@ function NewsComponent(){
                         </div>
                     </div>
                 </nav>
-                {newsData && newsData.isLoading ? (bool ? <NewsPageComponent /> : <Loader />) : <NewsPageComponent newsData={newsData.data} showForm={showForm}/>}
+                {newsData && newsData.isLoading ? (bool ? <NewsPageComponent /> : <Loader />) : <NewsPageComponent newsData={newsData.data}/>}
             </div>
-        ) : (
-            <Blogform showForm={showForm}/>
-        )}
+        )
         </>
     )
 }
